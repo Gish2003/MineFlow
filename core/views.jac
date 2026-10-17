@@ -105,6 +105,30 @@ obj MessageView {
         mine: bool;
 }
 
+obj ClaimView {
+    has id: str,
+        ref: str,
+        order_id: str,
+        order_ref: str,
+        shipment_id: str,
+        shipment_ref: str,
+        claim_type: str,
+        status: str,
+        description: str,
+        plant_name: str,
+        lot_code: str,
+        qty_expected_t: float,
+        qty_received_t: float,
+        routed_to: str,
+        resolution: str,
+        created_by_name: str,
+        created_at: float,
+        updated_at: float,
+        evidence: list[EvidenceView] = [],
+        can_review: bool = False,
+        can_resolve: bool = False;
+}
+
 obj FileDownload {
     has ok: bool,
         code: str = "",

@@ -58,7 +58,7 @@ def availability(lot: StockLot) -> LotAvailability {
 
 """Walks plant -> lots -> HELD reservations and reports one availability row
 per lot (optionally filtered to a mineral)."""
-walker InventoryRollup {
+walker:priv InventoryRollup {
     has mineral_code: str = "",
         rows: list[LotAvailability] = [],
         reports: list[list[LotAvailability]] = [];

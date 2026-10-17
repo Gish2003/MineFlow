@@ -52,7 +52,7 @@ test "public endpoints expose no secrets beyond demo labels" {
         assert "fallback" in status["agent_label"].lower() or "agent" in status["agent_label"].lower();
         personas = call(client, "demo_personas");
         keys = [p["key"] for p in personas];
-        assert "buyer" in keys and "admin" in keys and "staff-driver4" not in keys, f"non-login staff must not be listed: {keys}";
+        assert "buyer" in keys and "admin" in keys and "staff-loader-mdq" not in keys, f"non-login staff must not be listed: {keys}";
     } finally {
         client.close();
     }

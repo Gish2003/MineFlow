@@ -42,7 +42,7 @@ glob PERSONAS: list[PersonaDef] = [
     PersonaDef(key="staff-loader-mdq", email="roshan.alwis@example.com", display_name="Roshan Alwis", role=Role.LOADER, org_code="SRM", blurb="Matale loader.", primary=False, login=False, plant_codes=["MDQ"]),
     PersonaDef(key="staff-loader-pms", email="priyantha.silva@example.com", display_name="Priyantha Silva", role=Role.LOADER, org_code="CSL", blurb="Pulmoddai loader.", primary=False, login=False, plant_codes=["PMS"]),
     PersonaDef(key="staff-loader-nsp", email="dinesh.perera@example.com", display_name="Dinesh Perera", role=Role.LOADER, org_code="CSL", blurb="Nattandiya loader.", primary=False, login=False, plant_codes=["NSP"]),
-    PersonaDef(key="staff-driver4", email="nuwan.herath@example.com", display_name="Nuwan Herath", role=Role.DRIVER, org_code="MHN", blurb="Driver based in Puttalam.", primary=False, login=False, license_class="HEAVY", home_lat=8.03, home_lng=79.84)
+    PersonaDef(key="driver4", email="nuwan.herath@example.com", display_name="Nuwan Herath", role=Role.DRIVER, org_code="MHN", blurb="Driver based in Puttalam - free for new jobs.", primary=False, license_class="HEAVY", home_lat=8.03, home_lng=79.84)
 ];
 
 def persona_by_key(key: str) -> PersonaDef | None {
