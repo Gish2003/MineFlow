@@ -19,6 +19,9 @@ import from evidence.store { upload_evidence, get_evidence_file }
 import from claims.store { claims_list, resolve_claim }
 import from messaging.store { shipment_messages, my_notifications }
 import from payments.ledger { ledger_entries, set_payment_status }
+import from inventory.store { manager_plants, plant_detail }
+import from inventory.spreadsheet { preview_import, export_inventory }
+import from admin.store { admin_directory, admin_reset_demo }
 
 import from ".components.ui.button" { Button }
 import from ".components.ui.card" {

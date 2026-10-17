@@ -215,6 +215,7 @@ node ImportBatch(DomainNode) {
         applied: int = 0,
         skipped: int = 0,
         errors: list[str] = [],
+        payload_json: str = "",
         status: str = "PREVIEWED";
 }
 

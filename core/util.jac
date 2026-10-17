@@ -55,3 +55,19 @@ def fmt_time(ts: float) -> str {
 def clean_text(text: str, limit: int = 2000) -> str {
     return text.strip()[:limit];
 }
+
+"""Normalize a list-of-ids endpoint parameter. Omitted list parameters with a
+default can arrive as the JSON text "[]" from the HTTP binder."""
+def id_list(value: any) -> list[str] {
+    if isinstance(value, str) {
+        try {
+            value = json.loads(value) if value.strip().startswith("[") else [value];
+        } except ValueError {
+            return [];
+        }
+    }
+    if not isinstance(value, list) {
+        return [];
+    }
+    return [str(x) for x in value if isinstance(x, str) and x.strip()];
+}

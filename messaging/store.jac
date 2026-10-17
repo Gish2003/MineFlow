@@ -11,7 +11,7 @@ import from core.hub { get_shipment, get_order, all_shipments, name_of_plant, fe
 import from core.access { AppError, Caller, current_caller, dispatcher_covers_plant, not_found, invalid, bad_state }
 import from core.audit { notify }
 import from core.views { ActionResult, MessageView, NotificationView }
-import from core.util { now, clean_text }
+import from core.util { now, clean_text, id_list }
 
 obj MessagesResult {
     has ok: bool,
@@ -156,6 +156,7 @@ def:protect my_notifications(poll: int = 0) -> NotificationsResult {
 def:protect mark_notifications_read(ids: list[str] = []) -> ActionResult {
     try {
         c = current_caller();
+        ids = id_list(ids);
         for n in [c.account ->:HasNotification:-> [?:Notification]] {
             if not ids or jid(n) in ids {
                 n.read = True;
