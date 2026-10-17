@@ -2,10 +2,10 @@
 
 import from core.model {
     MineFlowHub, HubLink, HasOrg, HasAccount, HasMineral, HasGrade, OperatesPlant,
-    HoldsLot, HasSlot, HasShift, OwnsTruck, HasSite, HasOrder, HasLine, HasShipment,
+    HoldsLot, HasSlot, OwnsTruck, HasSite, HasOrder, HasLine, HasShipment,
     HasReservation, HasOffer, HasException, HasLedgerEntry, HasAudit, HasClaim,
     Organization, Account, Mineral, GradeSpec, Plant, StockLot, LoadingSlot,
-    LoaderShift, Truck, DeliverySite, Order, OrderLine, Shipment, Reservation,
+    Truck, DeliverySite, Order, OrderLine, Shipment, Reservation,
     DriverOffer, ExceptionCase, LedgerEntry, AuditEvent, Claim, AgentRun, Evidence,
     EvidenceBlob, HasBlob
 }
@@ -158,8 +158,8 @@ def all_minerals -> list[Mineral] {
     return [get_hub() ->:HasMineral:-> [?:Mineral]];
 }
 
-def mineral_by_code(code: str) -> Mineral | None {
-    found = [get_hub() ->:HasMineral:-> [?:Mineral, code == code]];
+def mineral_by_code(wanted: str) -> Mineral | None {
+    found = [get_hub() ->:HasMineral:-> [?:Mineral, code == wanted]];
     return found[0] if found else None;
 }
 
@@ -190,10 +190,6 @@ def lots_of(p: Plant) -> list[StockLot] {
 
 def slots_of(p: Plant) -> list[LoadingSlot] {
     return [p ->:HasSlot:-> [?:LoadingSlot]];
-}
-
-def shifts_of(p: Plant) -> list[LoaderShift] {
-    return [p ->:HasShift:-> [?:LoaderShift]];
 }
 
 def all_trucks -> list[Truck] {

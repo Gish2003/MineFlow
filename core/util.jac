@@ -23,7 +23,7 @@ def sha256_hex(data: bytes) -> str {
 
 def to_json(value: any) -> str {
     try {
-        return json.dumps(value, default=str, sort_keys=True);
+        return json.dumps(value, `default=str, sort_keys=True);
     } except Exception {
         return str(value);
     }

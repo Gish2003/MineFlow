@@ -20,7 +20,9 @@ obj Settings {
         live_seconds: int,
         weak_seconds: int,
         bootstrap_admin_code: str,
-        max_upload_bytes: int;
+        max_upload_bytes: int,
+        tz_offset_hours: float,
+        max_load_t: float;
 }
 
 def load_local_env(path: str = ".env") {
@@ -90,7 +92,9 @@ def settings -> Settings {
         live_seconds=env_int("MINEFLOW_LIVE_SECONDS", 45),
         weak_seconds=env_int("MINEFLOW_WEAK_SECONDS", 180),
         bootstrap_admin_code=env_str("MINEFLOW_BOOTSTRAP_ADMIN_CODE", ""),
-        max_upload_bytes=env_int("MINEFLOW_MAX_UPLOAD_BYTES", 3000000)
+        max_upload_bytes=env_int("MINEFLOW_MAX_UPLOAD_BYTES", 3000000),
+        tz_offset_hours=env_float("MINEFLOW_TZ_OFFSET_HOURS", 5.5),
+        max_load_t=env_float("MINEFLOW_MAX_LOAD_T", 40.0)
     );
 }
 

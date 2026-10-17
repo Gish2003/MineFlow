@@ -36,7 +36,6 @@ edge HasGrade(DomainEdge) {}
 edge OperatesPlant(DomainEdge) {}
 edge HoldsLot(DomainEdge) {}
 edge HasSlot(DomainEdge) {}
-edge HasShift(DomainEdge) {}
 edge HasQualityRecord(DomainEdge) {}
 edge HasProductionPlan(DomainEdge) {}
 edge HasDelay(DomainEdge) {}
@@ -97,6 +96,8 @@ node Account(DomainNode) {
         license_class: str = "",
         home_lat: float = 0.0,
         home_lng: float = 0.0,
+        shift_start_hour: int = 6,
+        shift_end_hour: int = 18,
         created_at: float = 0.0;
 }
 
@@ -131,7 +132,8 @@ node Plant(DomainNode) {
         loader_rate_tph: float = 120.0,
         setup_minutes: int = 15,
         readiness_buffer_min: int = 15,
-        loading_fee_per_t: float = 150.0;
+        loading_fee_per_t: float = 150.0,
+        slots_until: float = 0.0;
 }
 
 node StockLot(DomainNode) {
@@ -179,13 +181,6 @@ node LoadingSlot(DomainNode) {
         status: SlotStatus = SlotStatus.OPEN,
         shipment_id: str = "",
         blocked_reason: str = "";
-}
-
-node LoaderShift(DomainNode) {
-    has plant_id: str,
-        loader_id: str,
-        start_ts: float,
-        end_ts: float;
 }
 
 node ProductionPlan(DomainNode) {
