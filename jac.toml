@@ -1,0 +1,94 @@
+[project]
+name = "mineflow-ai"
+version = "0.1.0"
+description = "MineFlow AI - role-based mineral ordering, dispatch and delivery platform"
+entry-point = "main"
+kind = "web-app"
+jac-version = "==0.37.25"
+
+# Build artifacts (venv, node_modules, client bundle, cache). Bun hangs when
+# installing onto a Windows drive mounted in WSL (/mnt/<drive>), so point this at
+# a Linux-native path there, e.g. MINEFLOW_BUILD_DIR=/home/<you>/.mineflow-build
+[build]
+dir = "${MINEFLOW_BUILD_DIR:-.jac}"
+
+# A web app: keep pure helper modules on the server rather than native.
+[placement]
+default = "server"
+
+[jac-shadcn]
+style = "nova"
+baseColor = "stone"
+theme = "amber"
+font = "inter"
+radius = "default"
+menuAccent = "subtle"
+menuColor = "default"
+
+[dependencies]
+
+[dependencies.npm]
+sonner = "^2.0.7"
+# Pinned like Jac's flagship template: 4.3.4 re-exports mis-cased icon files.
+"@hugeicons/core-free-icons" = "4.3.3"
+"@hugeicons/react" = "^1.1.9"
+"@radix-ui/react-slot" = "^1.3.3"
+radix-ui = "*"
+class-variance-authority = "*"
+"@fontsource-variable/inter" = "*"
+"@tailwindcss/vite" = "^4.1.17"
+tailwindcss = "^4.1.17"
+clsx = "^2.1.1"
+tailwind-merge = "^3.5.0"
+tw-animate-css = "^1.4.0"
+leaflet = "^1.9.4"
+react-leaflet = "^5.0.0"
+
+[client.vite]
+plugins = ["tailwindcss()"]
+lib_imports = ["import tailwindcss from '@tailwindcss/vite'"]
+
+[client.app_meta_data]
+title = "MineFlow AI"
+description = "Mineral ordering, dispatch and delivery for mining plants and buyers"
+theme_color = "#b45309"
+
+[client.routing]
+auth_redirect = "/login"
+
+[serve]
+# The graph visualizer would expose the shared operational graph; keep it off.
+graph_enabled = false
+
+[byllm.model]
+default_model = "${MINEFLOW_LLM_MODEL:-anthropic/claude-sonnet-5}"
+
+[environments.production.serve]
+docs_enabled = false
+graph_enabled = false
+
+[dependencies.pypi]
+openpyxl = "~=3.1"
+
+# Backend domain modules: pure server logic, never meant to run in the
+# browser. Pin them server-side so the client placement solver stops trying
+# to pull their private helpers (core.audit, core.util, ...) into the bundle
+# just because a page imports a type or a def:protect endpoint from them.
+[placement.pins]
+"core.*" = "server"
+"catalog.*" = "server"
+"inventory.*" = "server"
+"scheduling.*" = "server"
+"reservations.*" = "server"
+"orders.*" = "server"
+"planning.*" = "server"
+"dispatch.*" = "server"
+"delivery.*" = "server"
+"loading.*" = "server"
+"evidence.*" = "server"
+"claims.*" = "server"
+"messaging.*" = "server"
+"payments.*" = "server"
+"admin.*" = "server"
+"seed.*" = "server"
+"identity.*" = "server"
