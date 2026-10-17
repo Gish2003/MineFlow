@@ -69,3 +69,26 @@ graph_enabled = false
 
 [dependencies.pypi]
 openpyxl = "~=3.1"
+
+# Backend domain modules: pure server logic, never meant to run in the
+# browser. Pin them server-side so the client placement solver stops trying
+# to pull their private helpers (core.audit, core.util, ...) into the bundle
+# just because a page imports a type or a def:protect endpoint from them.
+[placement.pins]
+"core.*" = "server"
+"catalog.*" = "server"
+"inventory.*" = "server"
+"scheduling.*" = "server"
+"reservations.*" = "server"
+"orders.*" = "server"
+"planning.*" = "server"
+"dispatch.*" = "server"
+"delivery.*" = "server"
+"loading.*" = "server"
+"evidence.*" = "server"
+"claims.*" = "server"
+"messaging.*" = "server"
+"payments.*" = "server"
+"admin.*" = "server"
+"seed.*" = "server"
+"identity.*" = "server"

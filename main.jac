@@ -23,22 +23,14 @@ import from inventory.store { manager_plants, plant_detail }
 import from inventory.spreadsheet { preview_import, export_inventory }
 import from admin.store { admin_directory, admin_reset_demo }
 
-import from ".components.ui.button" { Button }
-import from ".components.ui.card" {
-    Card, CardHeader, CardTitle, CardDescription, CardContent
-}
+import from .components.ui.tooltip { TooltipProvider }
+import from .components.ui.sonner { Toaster }
 import ".styles.global.css";
 
-def:pub app() -> JsxElement {
-    return <div className="min-h-screen bg-background text-foreground flex items-center justify-center p-6">
-        <Card className="w-full max-w-md">
-            <CardHeader>
-                <CardTitle>MineFlow AI</CardTitle>
-                <CardDescription>Mineral ordering, dispatch and delivery.</CardDescription>
-            </CardHeader>
-            <CardContent className="flex gap-2">
-                <Button>Get started</Button>
-            </CardContent>
-        </Card>
-    </div>;
+"""Global providers around the file-based router tree from pages/."""
+def:pub app(children: any) -> JsxElement {
+    <TooltipProvider>
+        {children}
+        <Toaster position="top-right" />
+    </TooltipProvider>
 }
